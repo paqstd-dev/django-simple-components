@@ -1,0 +1,9 @@
+{% load simple_components %}
+
+{% set_component "simple_v4" %}
+    <p>{{ c_list }}, {{ c_list.1 }}</p>
+    <p>{{ c_string }}, {{ c_string.4 }}</p>
+    <p>{{ c_dict }}, {{ c_dict.a.b.c }}</p>
+{% end_set_component %}
+
+{% component "simple_v4" c_list=list c_string=string c_dict=dict %}

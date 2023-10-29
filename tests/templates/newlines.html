@@ -1,0 +1,19 @@
+{% load simple_components %}
+
+{% set_component "simple_v3" %}
+    <div>
+        <h3>{{ title }}</h3>
+        <p>{{ description }}</p>
+
+        {{ other }}
+    </div>
+{% end_set_component %}
+
+{% component
+    "simple_v3"
+
+    title="Hello"
+    description="World"
+
+    other="..."
+%}

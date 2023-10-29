@@ -1,0 +1,9 @@
+{% load simple_components %}
+
+{% set_component "simple_v2" %}
+    <p>{{ text1 }}, {{ text2 }}, {{ text3 }}</p>
+{% end_set_component %}
+
+{% component "simple_v2" text1="a" text2="b" text3="c" %}
+{% component "simple_v2" text1="1" text2="2" text3="3" %}
+{% component "simple_v2" text1="'abc'" text2=" ?" text3=" " %}

@@ -1,23 +1,21 @@
 import re
 from django import template
 
-
 # allow line breaks inside tags
 template.base.tag_re = re.compile(template.base.tag_re.pattern, re.DOTALL)
-
 
 register = template.Library()
 
 
 @register.tag
 def set_component(parser, token):
-    nodelist = parser.parse(("end_set_component",))
+    nodelist = parser.parse(('end_set_component',))
     parser.delete_first_token()
 
     bits = token.split_contents()
     if len(bits) < 2:
         raise template.TemplateSyntaxError(
-            "'%s' takes at least one argument (name of component)" % bits[0]
+            '\'%s\' takes at least one argument (name of component)' % bits[0]
         )
 
     component_name = str(parser.compile_filter(bits[1]))
@@ -68,7 +66,7 @@ class ComponentNode(template.Node):
     def __init__(self, component_name=None, kwargs=None):
         if component_name is None:
             raise template.TemplateSyntaxError(
-                "Component template nodes must be given a name to return."
+                'Component template nodes must be given a name to return.'
             )
 
         self.component_name = component_name
@@ -79,7 +77,13 @@ class ComponentNode(template.Node):
         self.kwargs = kwargs
 
     def render(self, context):
-        nodelist = context['components'][self.component_name]
+        try:
+            nodelist = context['components'][self.component_name]
+        except KeyError:
+            raise template.TemplateSyntaxError(
+                'The component \'%s\' has not been previously defined.Check that the component is named correctly.'
+                % self.component_name
+            )
 
         for key, value in self.kwargs.items():
             context[key] = value.resolve(context)
