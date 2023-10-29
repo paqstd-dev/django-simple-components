@@ -1,0 +1,20 @@
+{% load simple_components %}
+
+{% set_component "first_component" %}
+    <div class="card">
+        <h3>{{ title }}</h3>
+        <p>{{ description }}</p>
+    </div>
+{% end_set_component %}
+
+<div class="card-list">
+    {% component "first_component" title="Hello world!" description="Some text..." %}
+    {% component "first_component"
+        title="Some lines"
+        description="Other text..."
+    %}
+
+    {% with value="this text will be capitalized later" %}
+        {% component "first_component" title=123 description=value|capfirst %}
+    {% endwith %}
+</div>
