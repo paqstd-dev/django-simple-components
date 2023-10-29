@@ -4,6 +4,11 @@ Django Simple Components is a small package to easily create components inside y
 
 ## Quick start
 
+0. Install package from pypi:
+```bash
+pip install django-simple-components
+```
+
 1. Add `simple_components` to your INSTALLED_APPS setting like this:
 ```python
 INSTALLED_APPS = [
