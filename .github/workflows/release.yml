@@ -16,11 +16,11 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Build the distribution
+      - name: Build source and wheel distributions
         run: |
-          pip install -r requirements.txt
-          python -m pip install --upgrade build
+          python -m pip install --upgrade build twine
           python -m build
+          twine check --strict dist/*
 
       - name: Publish distribution to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
