@@ -1,15 +1,20 @@
 # Django Simple Components
+[![PyPI version](https://badge.fury.io/py/django-simple-components.svg)](https://pypi.python.org/pypi/django-simple-components/)
+[![PyPI Supported Python Versions](https://img.shields.io/pypi/pyversions/django-simple-components.svg)](https://pypi.python.org/pypi/django-simple-components/)
+[![PyPI Supported Django Versions](https://img.shields.io/pypi/djversions/django-simple-components.svg)](https://pypi.python.org/pypi/django-simple-components/)
+[![Coverage)](https://img.shields.io/codecov/c/github/paqstd-dev/django-simple-components/main.svg)](https://app.codecov.io/github/paqstd-dev/django-simple-components)
 
 Django Simple Components is a small package to easily create components inside your templates without saving them in the templates folder.
 
 ## Quick start
 
-### 0. Install package from pypi:
+### 1. Install package:
+To get started, install the package from [pypi](https://pypi.org/project/django-simple-components/):
 ```bash
 pip install django-simple-components
 ```
 
-### 1. Add `simple_components` to your INSTALLED_APPS setting like this:
+Now you can add `simple_components` to your django project. Change your `INSTALLED_APPS` setting like this:
 ```python
 INSTALLED_APPS = [
     ...,
