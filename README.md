@@ -4,12 +4,12 @@ Django Simple Components is a small package to easily create components inside y
 
 ## Quick start
 
-0. Install package from pypi:
+### 0. Install package from pypi:
 ```bash
 pip install django-simple-components
 ```
 
-1. Add `simple_components` to your INSTALLED_APPS setting like this:
+### 1. Add `simple_components` to your INSTALLED_APPS setting like this:
 ```python
 INSTALLED_APPS = [
     ...,
@@ -17,7 +17,28 @@ INSTALLED_APPS = [
 ]
 ```
 
-2. Add `simple_components` to your template like this:
+Optionally, you can specify `simple_components` as builtins and this will be available in any of your templates without additionally specifying `{% load simple_components %}`:
+```python
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [BASE_DIR / "templates"],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+            ],
+            "builtins": ["simple_components.templatetags.simple_components"],
+        },
+    },
+]
+```
+If you choose not use it as a built-in, you will need to add `{% load simple_components %}` to the top of your template whenever you want to use simple components.
+
+### 2. Create component inside your template:
 ```html
 {% load simple_components %}
 
@@ -41,7 +62,7 @@ INSTALLED_APPS = [
 </div>
 ```
 
-3. Hooray! Everything is ready to use it.
+### 3. Hooray! Everything is ready to use it.
 
 ## Contributing
 If you would like to suggest a new feature, you can create an issue on the GitHub repository for this project. 

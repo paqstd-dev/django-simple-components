@@ -1,6 +1,8 @@
 import re
 from django import template
 
+from ..exceptions import SetComponentNameError, ComponentNameError, ComponentArgsError, ComponentNotDefined
+
 # allow line breaks inside tags
 template.base.tag_re = re.compile(template.base.tag_re.pattern, re.DOTALL)
 
@@ -14,7 +16,7 @@ def set_component(parser, token):
 
     bits = token.split_contents()
     if len(bits) < 2:
-        raise template.TemplateSyntaxError(
+        raise SetComponentNameError(
             '\'%s\' takes at least one argument (name of component)' % bits[0]
         )
 
@@ -39,9 +41,10 @@ class SetComponentNode(template.Node):
 @register.tag
 def component(parser, token):
     bits = token.split_contents()
-    if len(bits) < 2:
-        raise template.TemplateSyntaxError(
-            '\'%s\' takes at least one argument (name of component)' % bits[0]
+    if len(bits) < 2 or '=' in bits[1]:
+        example = '{% component \"name\" ' + ' '.join(bits[1:]) + ' %}'
+        raise ComponentNameError(
+            'Component takes at least one required argument (name of component):\n%s' % example
         )
 
     component_name = str(parser.compile_filter(bits[1]))
@@ -55,36 +58,29 @@ def component(parser, token):
         if name:
             kwargs[name] = parser.compile_filter(value)
         else:
-            raise template.TemplateSyntaxError(
-                '\'%s\' must be takes as kwargs' % bit
+            example = '{% component "' + component_name + '" param1=%s' % bit + ' ... %}'
+            raise ComponentArgsError(
+                'Argument %s must be takes as kwargs:\n%s' % (bit, example)
             )
 
     return ComponentNode(component_name, kwargs)
 
 
 class ComponentNode(template.Node):
-    def __init__(self, component_name=None, kwargs=None):
-        if component_name is None:
-            raise template.TemplateSyntaxError(
-                'Component template nodes must be given a name to return.'
-            )
-
+    def __init__(self, component_name, kwargs=None):
         self.component_name = component_name
-
-        if kwargs is None:
-            kwargs = {}
-
         self.kwargs = kwargs
 
     def render(self, context):
         try:
             nodelist = context['components'][self.component_name]
         except KeyError:
-            raise template.TemplateSyntaxError(
-                'The component \'%s\' has not been previously defined.Check that the component is named correctly.'
+            raise ComponentNotDefined(
+                'The component \'%s\' has not been previously defined. Check that the component is named correctly.'
                 % self.component_name
             )
 
-        for key, value in self.kwargs.items():
-            context[key] = value.resolve(context)
+        if self.kwargs is not None:
+            for key, value in self.kwargs.items():
+                context[key] = value.resolve(context)
         return nodelist.render(context)

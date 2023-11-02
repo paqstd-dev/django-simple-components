@@ -4,8 +4,6 @@ requires = [
     "setuptools-scm>=8.0"]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools_scm]
-
 [project]
 name = "django-simple-components"
 dynamic = ["version"]
@@ -35,3 +33,13 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/paqstd-dev/django-simple-components"
 "Bug Tracker" = "https://github.com/paqstd-dev/django-simple-components/issues"
+
+
+[tool.setuptools_scm]
+
+[tool.coverage.run]
+omit = [
+    "manage.py",
+    "setup.py",
+    "tests/*"
+]

@@ -1,4 +1,4 @@
-name: Check code
+name: Testing code & Coverage
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
       - '**.py'
 
 jobs:
-  code-checks:
+  tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -31,4 +31,28 @@ jobs:
 
       - name: Run tests
         run: |
-          python run.py test
+          python manage.py test
+
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install coverage
+
+      - name: Run tests with coverage
+        run: |
+          python -m coverage run --source='.' manage.py test   
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

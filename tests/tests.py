@@ -1,6 +1,8 @@
 from django.test import TestCase
 from django.template.loader import render_to_string
 
+from simple_components import exceptions
+
 
 class ComponentTestCase(TestCase):
     def test_setup_component(self):
@@ -52,3 +54,19 @@ class ComponentTestCase(TestCase):
         """
 
         self.assertHTMLEqual(expected, template)
+
+    def test_raise_set_component_name(self):
+        with self.assertRaises(exceptions.SetComponentNameError):
+            render_to_string('raise_set_component_name.html')
+
+    def test_raise_component_name(self):
+        with self.assertRaises(exceptions.ComponentNameError):
+            render_to_string('raise_component_name.html')
+
+    def test_raise_component_not_found(self):
+        with self.assertRaises(exceptions.ComponentNotDefined):
+            render_to_string('raise_component_not_found.html')
+
+    def test_raise_component_args(self):
+        with self.assertRaises(exceptions.ComponentArgsError):
+            render_to_string('raise_component_args.html')
