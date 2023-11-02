@@ -65,8 +65,8 @@ If you choose not use it as a built-in, you will need to add `{% load simple_com
 ### 3. Hooray! Everything is ready to use it.
 
 ## Contributing
-If you would like to suggest a new feature, you can create an issue on the GitHub repository for this project. 
-If you'd like to contribute code, you can fork the repository and submit a pull request with your changes.
+If you would like to suggest a new feature, you can create an issue on the GitHub repository for this project.
+Also you can fork the repository and submit a pull request with your changes.
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for more information.

@@ -33,15 +33,25 @@ jobs:
         run: |
           python manage.py test
 
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+      - uses: pre-commit/action@v3.0.0
+
   coverage:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python 3.10
+      - name: Set up Python 3.11
         uses: actions/setup-python@v4
         with:
-          python-version: 3.10
+          python-version: 3.11
 
       - name: Install dependencies
         run: |
@@ -50,7 +60,7 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          python -m coverage run --source='.' manage.py test   
+          python -m coverage run --source='.' manage.py test
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3

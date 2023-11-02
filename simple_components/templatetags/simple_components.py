@@ -1,7 +1,13 @@
 import re
+
 from django import template
 
-from ..exceptions import SetComponentNameError, ComponentNameError, ComponentArgsError, ComponentNotDefined
+from ..exceptions import (
+    ComponentArgsError,
+    ComponentNameError,
+    ComponentNotDefined,
+    SetComponentNameError,
+)
 
 # allow line breaks inside tags
 template.base.tag_re = re.compile(template.base.tag_re.pattern, re.DOTALL)
@@ -41,10 +47,11 @@ class SetComponentNode(template.Node):
 @register.tag
 def component(parser, token):
     bits = token.split_contents()
-    if len(bits) < 2 or '=' in bits[1]:
-        example = '{% component \"name\" ' + ' '.join(bits[1:]) + ' %}'
+    if len(bits) < 2 or "=" in bits[1]:
+        example = '{% component "name" ' + ' '.join(bits[1:]) + ' %}'
         raise ComponentNameError(
-            'Component takes at least one required argument (name of component):\n%s' % example
+            'Component takes at least one required argument (name of component):\n%s'
+            % example
         )
 
     component_name = str(parser.compile_filter(bits[1]))
@@ -58,7 +65,9 @@ def component(parser, token):
         if name:
             kwargs[name] = parser.compile_filter(value)
         else:
-            example = '{% component "' + component_name + '" param1=%s' % bit + ' ... %}'
+            example = (
+                '{% component "' + component_name + '" param1=%s' % bit + ' ... %}'
+            )
             raise ComponentArgsError(
                 'Argument %s must be takes as kwargs:\n%s' % (bit, example)
             )
@@ -76,8 +85,8 @@ class ComponentNode(template.Node):
             nodelist = context['components'][self.component_name]
         except KeyError:
             raise ComponentNotDefined(
-                'The component \'%s\' has not been previously defined. Check that the component is named correctly.'
-                % self.component_name
+                'The component \'%s\' has not been previously defined. '
+                'Check that the component is named correctly.' % self.component_name
             )
 
         if self.kwargs is not None:

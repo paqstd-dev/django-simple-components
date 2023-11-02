@@ -1,5 +1,5 @@
-from django.test import TestCase
 from django.template.loader import render_to_string
+from django.test import TestCase
 
 from simple_components import exceptions
 
@@ -37,13 +37,7 @@ class ComponentTestCase(TestCase):
         context = {
             'list': ['apple', 'banana', 'tomato'],
             'string': 'django',
-            'dict': {
-                'a': {
-                    'b': {
-                        'c': 123
-                    }
-                }
-            }
+            'dict': {'a': {'b': {'c': 123}}},
         }
 
         template = render_to_string('context.html', context)

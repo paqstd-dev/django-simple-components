@@ -7,10 +7,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# fmt: off
 INSTALLED_APPS = [
     'tests',
     'simple_components'
 ]
+# fmt: on
 
 ROOT_URLCONF = 'tests.urls'
 
@@ -27,9 +29,11 @@ TEMPLATES = [
     },
 ]
 
+# fmt: off
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': ':memory:'
     }
 }
+# fmt: on
