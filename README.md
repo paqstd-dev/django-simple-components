@@ -1,8 +1,8 @@
 # Django Simple Components
-[![PyPI version](https://badge.fury.io/py/django-simple-components.svg)](https://pypi.python.org/pypi/django-simple-components/)
+[![PyPI version](https://img.shields.io/pypi/v/django-simple-components)](https://pypi.python.org/pypi/django-simple-components/)
 [![PyPI Supported Python Versions](https://img.shields.io/pypi/pyversions/django-simple-components.svg)](https://pypi.python.org/pypi/django-simple-components/)
 [![PyPI Supported Django Versions](https://img.shields.io/pypi/djversions/django-simple-components.svg)](https://pypi.python.org/pypi/django-simple-components/)
-[![Coverage)](https://img.shields.io/codecov/c/github/paqstd-dev/django-simple-components/main.svg)](https://app.codecov.io/github/paqstd-dev/django-simple-components)
+[![Coverage)](https://codecov.io/github/paqstd-dev/django-simple-components/graph/badge.svg)](https://app.codecov.io/github/paqstd-dev/django-simple-components)
 
 Django Simple Components is a small package to easily create components inside your templates without saving them in the templates folder.
 
