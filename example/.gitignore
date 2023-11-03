@@ -1,0 +1,9 @@
+# folders
+__pycache__/
+.idea/
+.DS_Store
+venv
+
+# files
+.env
+db.sqlite3

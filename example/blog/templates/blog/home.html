@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="p-5 text-center bg-body-tertiary rounded-3">
+        <h1 class="text-body-emphasis">django-simple-components</h1>
+        <p class="lead">
+            Django Simple Components is a small package to easily create components inside your templates
+            without saving them in the templates folder.
+        </p>
+    </div>
+
+    <style>
+    .feature-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: .75rem;
+    }
+
+    .icon {
+      width: 2rem;
+      height: 2rem;
+      border-radius: .75rem;
+    }
+    </style>
+
+    <div class="row g-4 row-cols-1 row-cols-lg-3">
+        {% #set_component "feature" %}
+            <div class="feature col">
+                <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                    {% @set_slot "icon" %}
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                           <path d="M9 11l3 3l8 -8"></path>
+                           <path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9"></path>
+                        </svg>
+                    {% /set_slot %}
+                </div>
+                <h4 class="fs-3 text-body-emphasis">{{ title }}</h4>
+                <p>{{ description }}</p>
+            </div>
+        {% /set_component %}
+
+        {% #component "feature"
+            title="Quickly create components"
+            description="You can define the component immediately in the same file where you plan to use it. No new files!"
+        %}
+            {% @slot "icon" %}
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4"></path>
+                   <path d="M13.5 6.5l4 4"></path>
+                   <path d="M16 19h6"></path>
+                   <path d="M19 16v6"></path>
+                </svg>
+            {% /slot %}
+        {% /component %}
+
+        {% #component "feature"
+            title="Named slots"
+            description="You can define slots inside a component and use them as portals. Each slot has a fallback to display the default value."
+        %}
+            {% @slot "icon" %}
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <path d="M4 4h6v8h-6z"></path>
+                   <path d="M4 16h6v4h-6z"></path>
+                   <path d="M14 12h6v8h-6z"></path>
+                   <path d="M14 4h6v4h-6z"></path>
+                </svg>
+            {% /slot %}
+        {% /component %}
+
+        {% #component "feature"
+            title="Special syntax"
+            description="To create, use components and slots, special tags are used. You can learn more about this from the official repository."
+        %}
+            {% @slot "icon" %}
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <path d="M4 4h6v8h-6z"></path>
+                   <path d="M4 16h6v4h-6z"></path>
+                   <path d="M14 12h6v8h-6z"></path>
+                   <path d="M14 4h6v4h-6z"></path>
+                </svg>
+            {% /slot %}
+        {% /component %}
+    </div>
+{% endblock %}

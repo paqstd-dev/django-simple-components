@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% #set_component "category" %}
+        <a href="?category={{ category.title }}"
+           class="badge {% if request.GET.category == category.title %}text-bg-primary{% else %}text-bg-light{% endif %} p-2">
+            {{ category.title }}
+        </a>
+    {% /set_component %}
+
+    {% #set_component "post" %}
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+                <h3 class="mb-0">{{ post.title }}</h3>
+                <div class="mb-1 text-body-secondary">{{ post.created }}</div>
+                <p class="card-text mb-auto">{{ post.description }}</p>
+                <a href="{% url 'post' post.id %}" class="icon-link gap-1 icon-link-hover stretched-link">
+                    Read
+                </a>
+            </div>
+
+            <div class="col-auto d-none d-lg-block">
+                {% @set_slot image %}
+                    <img src="https://source.unsplash.com/random/200x300?sig=random" />
+                {% /set_slot %}
+            </div>
+        </div>
+    {% /set_component %}
+
+    <div class="d-flex gap-2">
+        {% if request.GET.category %}<a href="?" class="badge text-bg-secondary p-2">Clear Filter</a>{% endif %}
+        {% for category in categories %}
+            {% component "category" category=category %}
+        {% endfor %}
+    </div>
+
+    <div class="row">
+        {% for post in posts %}
+            <div class="col-md-6">
+                {% #component "post" post=post %}
+                    {% @slot image %}
+                        <img src="/media/{{ post.cover }}" />
+                    {% /slot %}
+                {% /component %}
+            </div>
+        {% empty %}
+             <div class="col">
+                 <div class="alert alert-warning">
+                    <p class="alert-title mb-0">Empty List</p>
+                </div>
+             </div>
+        {% endfor %}
+    </div>
+{% endblock %}

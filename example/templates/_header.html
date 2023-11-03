@@ -1,0 +1,16 @@
+<nav class="py-2 bg-body-tertiary rounded">
+    <ul class="nav me-auto px-3">
+        {% #set_component "menu-link" %}
+            <li class="nav-item">
+                <a href="{{ href }}"
+                   class="nav-link {% if request.path == href %}bg-primary rounded text-white{% else %}link-body-emphasis{% endif %}"
+                   aria-current="page">
+                    {{ title }}
+                </a>
+            </li>
+        {% /set_component %}
+
+        {% component "menu-link" href="/" title="Home" %}
+        {% component "menu-link" href="/posts/" title="Posts" %}
+    </ul>
+</nav>

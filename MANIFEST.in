@@ -3,4 +3,5 @@ include README.md
 recursive-include simple_components/templates *
 
 exclude manage.py
+recursive-exclude example *
 recursive-exclude tests *
