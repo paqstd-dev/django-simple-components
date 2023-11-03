@@ -1,0 +1,11 @@
+{% load simple_components %}
+
+{% #set_component "card" %}
+    {% set_slot "title" %}
+{% /set_component %}
+
+{% #component "card" %}
+    {% @slot %}
+        <h1>Title</h1>
+    {% /slot %}
+{% /component %}

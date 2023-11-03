@@ -3,7 +3,10 @@
 {% #set_component "card" %}
     <div class="card">
         <h3>{{ title }}</h3>
+        {{ children }}
     </div>
 {% /set_component %}
 
-{% component "button" title="Exception" %}
+{% #component "card" title="Test passed!" %}
+    <p>Description as children</p>
+{% /component %}

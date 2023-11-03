@@ -1,0 +1,14 @@
+{% load simple_components %}
+
+{% #set_component "card" %}
+    <div class="card">
+        <h3>{{ title }}</h3>
+        <p>{{ description }}</p>
+    </div>
+{% /set_component %}
+
+<div class="card-list">
+    {% component "card" title="Post 1" description="..." %}
+    {% component "card" title="Post 2" description="..." %}
+    {% component "card" title="Post 3" description="..." %}
+</div>

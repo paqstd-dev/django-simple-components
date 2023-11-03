@@ -1,0 +1,26 @@
+{% load simple_components %}
+
+{% #set_component "card" %}
+    <div class="card">
+        <div class="card-header">
+            {% @set_slot "card-header" %}
+                <h3>Default fallback title</h3>
+            {% /set_slot %}
+        </div>
+        <div class="card-body">
+            {% set_slot "card-body" %}
+        </div>
+    </div>
+{% /set_component %}
+
+{% #set_component "header" %}
+    <div class="d-flex">
+        <h3>{{ title }}</h3>
+    </div>
+{% /set_component %}
+
+{% #component "card" %}
+    {% @slot "card-body" %}
+        <p>Simple slot</p>
+    {% /slot %}
+{% /component %}

@@ -3,7 +3,11 @@
 {% #set_component "card" %}
     <div class="card">
         <h3>{{ title }}</h3>
+
+        {% set_slot "description" %}
     </div>
 {% /set_component %}
 
-{% component "button" title="Exception" %}
+{% #component "card" title="Exception" %}
+    not rendered text
+{% /component %}

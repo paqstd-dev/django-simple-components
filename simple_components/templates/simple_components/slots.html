@@ -1,0 +1,36 @@
+{% load simple_components %}
+
+{% #set_component "profile" %}
+    <div class="profile">
+        <div class="avatar">
+            {% @set_slot "avatar" %}
+                <!-- fallback username as bdage -->
+                <span class="badge">{{ username.0 }}</span>
+            {% /set_slot %}
+        </div>
+        <div class="info">
+            {{ username }}
+        </div>
+    </div>
+{% /set_component %}
+
+{% #set_component "card" %}
+    <div class="card">
+        {% set_slot "image" %}
+
+        <h3>{{ title }}</h3>
+        <p>{{ description }}</p>
+    </div>
+{% /set_component %}
+
+<div class="page">
+    {% component "profile" username="Default" %}
+
+    <div class="card-list">
+        {% #component "card" title="Post 1" description="..." %}
+            {% @slot "image" %}
+                <img src="..." alt="slot image" />
+            {% /slot %}
+        {% /component %}
+    </div>
+</div>
